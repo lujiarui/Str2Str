@@ -29,8 +29,6 @@ This simply yet effective sampling pipeline draws abundant inspiration from trad
 </p>
 
 
-*!! Oops, this repo is still under construction, please be patient when we are making it complete at top speed.* 🥰
-
 
 ## 🚀 Installation
 ```sh
@@ -152,3 +150,6 @@ python script/pack.py -i /path/to/some/pdb/directory -o /path/to/output/director
 ## 📝 Cite Str2Str
 
 TBC..
+
+
+*!! Oops, this repo is still under construction, please be patient when we are making it complete at top speed.* 🥰
