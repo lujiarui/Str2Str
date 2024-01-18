@@ -87,7 +87,7 @@ python scripts/pdb/preprocess.py --mmcif_dir $DOWNLOAD_DIR/pdb_mmcif/mmcif_files
 
 First thing first, the path to train / test data should be configured right. Simply rename `.env.example` -> `.env` and specify the top three environment variables.
 
-#### Training:
+#### Training
 ```sh
 # Training w/ default configs.
 python src/train.py
@@ -106,11 +106,16 @@ python src/train.py +trainer.max_epochs=100
 python src/train.py +trainer.max_time="00:12:00:00"
 ```
 
-#### Inference:
+#### Inference
+
+To perform inference, a trained model checkpoint is required and can be specified using `ckpt_path=/path/to/checkpoint`. A pretrained PyTorch checkpoint can be accessed from [Google Drive](https://drive.google.com/file/d/1-qr2kXbmSoV5mPm7-6Fg6Rq9GPr74wLA/view?usp=drive_link). Download and put it into `data/ckpt`. 
 
 ```sh
 # inference (sampling & evaluation on metrics)
 python src/eval.py task_name=inference
+
+# inference (if you want to load checkpoint elsewhere)
+python src/eval.py task_name=inference ckpt_path=/path/to/some/checkpoint
 
 # sampling only (skip evaluation)
 python src/eval.py task_name=inference target_dir=null
