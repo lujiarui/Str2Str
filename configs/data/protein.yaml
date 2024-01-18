@@ -1,0 +1,24 @@
+_target_: src.data.protein_datamodule.ProteinDataModule
+# data_dir: ${paths.data_dir}
+
+dataset:
+  _target_: src.data.components.dataset.PretrainPDBDataset
+  path_to_dataset: ${paths.data_path}
+  metadata_filter: 
+    _target_: src.data.components.dataset.MetadataFilter
+    min_len: 10
+    max_len: 500
+  transform: 
+    _target_: src.data.components.dataset.ProteinFeatureTransform
+    truncate_length: null
+    strip_missing_residues: true
+    recenter_and_scale: true
+    eps: 1e-8
+  suffix: pkl
+
+batch_size: 2 # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+generator_seed: 42
+train_val_split: [0.95, 0.05]
+num_workers: 4
+pin_memory: false
+shuffle: false

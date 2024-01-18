@@ -1,0 +1,43 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /callbacks: default
+  - override /data: protein
+  - override /model: diffusion
+  - override /trainer: ddp
+  
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+callbacks:
+  model_checkpoint:
+    save_top_k: -1
+    every_n_epochs: 10
+    save_last: false
+
+
+data:
+  batch_size: 4
+
+model:
+  optimizer:
+    lr: 1e-4
+
+trainer:
+  min_epochs: 500
+  max_epochs: 1000
+  devices: 2
+  # gradient_clip_val: 0.5
+
+
+tags: ["dev"]
+
+task_name: "example_experiment"
+
+seed: 42
+
+ckpt_path: null

@@ -1,0 +1,103 @@
+_target_: src.models.diffusion_module.DiffusionLitModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 1e-4
+  weight_decay: 0.0
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+net:
+  _target_: src.models.net.denoising_ipa.DenoisingNet
+  embedder: 
+    _target_: src.models.net.denoising_ipa.EmbeddingModule
+    init_embed_size: 32
+    node_embed_size: 256
+    edge_embed_size: 128
+    num_bins: 22
+    min_bin: 1e-5
+    max_bin: 20.0
+    self_conditioning: true
+  translator:
+    _target_: src.models.net.ipa.TranslationIPA
+    c_s: 256
+    c_z: 128
+    coordinate_scaling: 0.1
+    no_ipa_blocks: 4
+    skip_embed_size: 64
+    transformer_num_heads: 4
+    transformer_num_layers: 2
+    c_hidden: 256
+    no_heads: 8
+    no_qk_points: 8
+    no_v_points: 12
+    dropout: 0.0
+
+diffuser:
+  _target_: src.models.score.frame.FrameDiffuser
+  trans_diffuser:
+    _target_: src.models.score.r3.R3Diffuser
+    min_b: 0.1
+    max_b: 20.0
+    coordinate_scaling: 0.1
+  rot_diffuser:
+    _target_: src.models.score.so3.SO3Diffuser
+    num_omega: 1000
+    num_sigma: 1000
+    min_sigma: 0.1
+    max_sigma: 1.5
+    schedule: logarithmic
+    cache_dir: ${paths.cache_dir}
+    use_cached_score: False
+  min_t: 1e-2
+
+loss:
+  translation:
+    weight: 1.0
+    coordinate_scaling: 0.1
+    x0_threshold: 1.0
+  rotation:
+    weight: 1.0
+  distogram:
+    enabled: false
+  supervised_chi:
+    enabled: false
+  lddt:
+    enabled: false
+  fape:
+    enabled: false
+  tm:
+    enabled: false
+  backbone:
+    enabled: true
+    weight: 0.25
+    t_threshold: 0.25
+  pwd:
+    enabled: true
+    weight: 0.25
+    t_threshold: 0.25
+  eps: 1e-6
+
+# default hparam for sampling s2011
+inference:
+  delta_min: 0.25
+  delta_max: 0.70
+  delta_step: 0.05
+  n_replica: 100
+  replica_per_batch: 64
+  num_timesteps: 1000
+  noise_scale: 1.0
+  probability_flow: true
+  self_conditioning: true
+  min_t: 1e-2
+  output_dir: ${paths.output_dir}/samples
+  backward_only: false
+
+# compile model for faster training with pytorch 2.0
+compile: false

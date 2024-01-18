@@ -1,0 +1,20 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: sampling # choose datamodule with `test_dataloader()` for evaluation
+  - model: diffusion
+  - logger: null
+  - trainer: gpu
+  - paths: env
+  - extras: default
+  - hydra: default
+
+task_name: "eval_dev"
+
+tags: ["dev"]
+
+# passing checkpoint path is necessary for evaluation
+ckpt_path: ${paths.data_dir}/ckpt/pretrain.pth
+target_dir: ${oc.env:REFERENCE_DATA}
+pred_dir: null

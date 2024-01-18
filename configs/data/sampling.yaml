@@ -1,0 +1,19 @@
+_target_: src.data.protein_datamodule.ProteinDataModule
+# data_dir: ${paths.data_dir}
+
+dataset:
+  _target_: src.data.components.dataset.SamplingPDBDataset
+  path_to_dataset: ${paths.test_data_path}
+  transform: 
+    _target_: src.data.components.dataset.ProteinFeatureTransform
+    truncate_length: null
+    strip_missing_residues: false
+    recenter_and_scale: false
+    eps: 1e-8
+  accession_code_fillter: null  # enable to only sample for the specified targets
+
+batch_size: 1
+generator_seed: 42
+num_workers: 1
+pin_memory: false
+shuffle: false
