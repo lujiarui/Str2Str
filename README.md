@@ -121,7 +121,7 @@ python src/eval.py task_name=inference target_dir=null
 python src/eval.py task_name=eval_only pred_dir=/path/to/some/pdb/directory
 ```
 
-Note that to run evaluation, you may need to specify the `REFERENCE_DATA` variable in the `.env` file, which should contain the 
+To run evaluation, you may need to specify the `REFERENCE_DATA` variable in the `.env` file. This path (points to a directory) should contain the reference trajectory/ensembles, one `.pdb` file per target, aligned with the directory arch like `TEST_DATA`. In the paper, the long MD trajectories from the study in [Science.1208351](https://www.science.org/doi/abs/10.1126/science.1208351) are used as reference.
 
 ## 🍪 Tools
 
