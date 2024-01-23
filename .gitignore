@@ -162,7 +162,7 @@ cython_debug/
 *.pth
 *.npy
 *output*
-*log*
+log*/
 ckpt
 .cache
 .*/
