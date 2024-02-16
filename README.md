@@ -7,7 +7,8 @@
 <a href="https://pytorchlightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white"></a>
 <a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
 <a href="https://github.com/ashleve/lightning-hydra-template"><img alt="Template" src="https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray"></a><br>
-[![Paper](http://img.shields.io/badge/paper-OpenReview-B31B1B.svg)](https://openreview.net/forum?id=C4BikKsgmK)
+[![arXiv](http://img.shields.io/badge/arxiv.2306.03117-B31B1B.svg)](https://arxiv.org/abs/2306.03117)
+[![OpenReview](http://img.shields.io/badge/OpenReview-8C1C12.svg)](https://openreview.net/forum?id=C4BikKsgmK)
 [![Conference](http://img.shields.io/badge/ICLR-2024-4b44ce.svg)](https://iclr.cc/Conferences/2024)
 
 </div>
@@ -15,13 +16,13 @@
 
 ## 📜 Description
 
-Str2Str is a score-based framework (which means it accommodate any diffusion/flow matching architecture) for protein conformation sampling in a zero-shot manner. The idea behind is very straightforward: given an input protein structure, which can be obtained from your favorite folding module, such as [AlphaFold](https://www.nature.com/articles/s41586-021-03819-2) or [ESMFold](https://www.science.org/doi/10.1126/science.ade2574), Str2Str perturbs the structure in the corresponding geometric space, followed by a sequence of denoising steps.  
+Str2Str is a score-based framework (which means it can accommodate any diffusion/flow matching architecture) for protein conformation sampling in a zero-shot manner. The idea behind is very straightforward: given an input protein structure, which can be obtained from your favorite folding module, such as [AlphaFold2](https://www.nature.com/articles/s41586-021-03819-2) or [ESMFold](https://www.science.org/doi/10.1126/science.ade2574), Str2Str perturbs the structure geometry in the corresponding conformation space, followed by a sequence of denoising steps as annealing.  
 
 <p align="center">
 <img src="assets/inference.png" width="450"/>
 </p>
 
-This simply yet effective sampling pipeline draws abundant inspiration from traditional methods to sample conformations, yet it is guided by a (learned) neural score network.
+This simply yet effective sampling pipeline draws abundant inspiration from traditional methods to sample conformations. Differently, it is guided by a neural score network train on the [PDB](https://www.rcsb.org/) database.
 
 
 <p align="center">
@@ -124,7 +125,7 @@ python src/eval.py task_name=inference target_dir=null
 python src/eval.py task_name=eval_only pred_dir=/path/to/some/pdb/directory
 ```
 
-To run evaluation, you may need to specify the `REFERENCE_DATA` variable in the `.env` file. This path (points to a directory) should contain the reference trajectory/ensembles, one `.pdb` file per target, aligned with the directory arch like `TEST_DATA`. In the paper, the long MD trajectories from the study in [Science.1208351](https://www.science.org/doi/abs/10.1126/science.1208351) are used as reference.
+To run evaluation, you may need to specify the `REFERENCE_DATA` variable in the `.env` file. This path (points to a directory) should contain the reference trajectory/ensembles, one `.pdb` file per target, aligned with the directory arch like `TEST_DATA`. In the paper, the long MD trajectories from the study in [this paper](https://www.science.org/doi/abs/10.1126/science.1208351) are used as reference.
 
 ## 🍪 Tools
 
@@ -153,8 +154,14 @@ python script/pack.py -i /path/to/some/pdb/directory -o /path/to/output/director
 
 
 ## 📝 Cite Str2Str
+If you find this codebase inspiring in your research, please cite the following paper. 🥰
 
-TBC..
+```
+@inproceedings{lu2024strstr,
+    title={Str2Str: A Score-based Framework for Zero-shot Protein Conformation Sampling},
+    author={Lu, Jiarui and Zhong, Bozitao and Zhang, Zuobai and Tang, Jian},
+    booktitle={The Twelfth International Conference on Learning Representations},
+    year={2024}
+}
+```
 
-
-*!! Oops, this repo is still under construction, please be patient when we are making it complete at top speed.* 🥰

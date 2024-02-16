@@ -163,11 +163,11 @@ def js_pwd(ca_coords_dict, ref_key='target', n_bins=50, pwd_offset=3, weights=No
     return results
 
 
-def js_tica(ca_coords_dict, ref_key='target', n_bins=50, pwd_offset=3, lagtime=20, return_tic=True, weights=None):
+def js_tica(ca_coords_dict, ref_key='target', n_bins=50, lagtime=20, return_tic=True, weights=None):
     # n_bins = 50 follows idpGAN
     
     ca_pwd = {
-        k: pairwise_distance_ca(v, k=pwd_offset) for k, v in ca_coords_dict.items()
+        k: pairwise_distance_ca(v) for k, v in ca_coords_dict.items()
     }   # (B, D)
     estimator = TICA(dim=2, lagtime=lagtime).fit(ca_pwd[ref_key])
     tica = estimator.fetch_model()
