@@ -161,10 +161,9 @@ cython_debug/
 
 *.pth
 *.npy
-*output*
+outputs/
 logs/
-ckpt
+*.ckpt
 .cache
 .*/
 slurm*.out
-*.slurm
