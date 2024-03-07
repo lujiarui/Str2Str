@@ -109,7 +109,7 @@ python src/train.py +trainer.max_time="00:12:00:00"
 
 #### Inference
 
-To perform inference, a trained model checkpoint is required and can be specified using `ckpt_path=/path/to/checkpoint`. A pretrained PyTorch checkpoint can be accessed from [Google Drive](https://drive.google.com/file/d/1-qr2kXbmSoV5mPm7-6Fg6Rq9GPr74wLA/view?usp=drive_link). Download and put it into `data/ckpt`. 
+To perform inference, a trained model checkpoint is required and can be specified using `ckpt_path=/path/to/checkpoint`. A pretrained PyTorch checkpoint can be accessed from [Google Drive](https://drive.google.com/file/d/1YsvFXOpdst4QxK34GSWvLjgbvzUq4Ry8/view?usp=sharing). Download and put it into `data/ckpt`. 
 
 ```sh
 # inference (sampling & evaluation on metrics)
