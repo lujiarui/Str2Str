@@ -180,7 +180,7 @@ dependencies:
       - colorlog==6.8.0
       - contextlib2==21.6.0
       - cython==0.29.36
-      - deepspeed==0.5.9
+      - deepspeed
       - deeptime==0.4.4
       - deprecated==1.2.14
       - distlib==0.3.8
